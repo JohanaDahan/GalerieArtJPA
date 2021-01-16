@@ -28,6 +28,8 @@ public class Galerie {
      @ToString.Exclude   
     @OneToMany(mappedBy = "oraganisateur", cascade= CascadeType.PERSIST)
     private List<Exposition> expositions;
+     
+     
 }
 
     

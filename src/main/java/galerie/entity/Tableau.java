@@ -33,11 +33,11 @@ public class Tableau {
     @NonNull
     private int hauteur;
     
-    @ManyToMany(mappedBy = "accrochage")
+    @ManyToMany(mappedBy = "oeuvres")
     @NonNull
-    private List<Exposition> organisateur = new LinkedList<>();
+    private List<Exposition> accrochage = new LinkedList<>();
     
-    @OneToOne
+    @OneToOne(mappedBy = "oeuvre")
     private Transaction vente;
     
     @ManyToOne(optional = false)

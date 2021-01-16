@@ -17,7 +17,7 @@ import lombok.*;
  * @author johan
  */
 @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString@Entity
-class Exposition {
+public class Exposition {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
@@ -41,15 +41,21 @@ class Exposition {
         private Galerie oraganisateur;   
 
 
-
-    @ManyToMany(mappedBy="exposition")
-    private List<Tableau> accrochage = new LinkedList<>();
+  @ManyToMany
+    @JoinTable(name="accrochage",joinColumns = @JoinColumn(name="exposition_id"),inverseJoinColumns = @JoinColumn(name="tableau_id"))
+    private List<Tableau> oeuvres= new LinkedList<>();
     
     
         @OneToMany(mappedBy = "lieuDeVente", cascade= CascadeType.PERSIST)
         private List<Transaction> ventes;
 
-  
+  public float CA(){
+        float ca=0;
+        for (Transaction v:ventes){
+            ca = ca + v.getPrixVente();
+        }
+        return ca;
+    }
     
    
 }
