@@ -29,6 +29,16 @@ public class Personne {
     
     @OneToMany(mappedBy = "client", cascade= CascadeType.PERSIST)
     private List<Transaction> achat;
+    
+     public float budgetArt(int annee) {
+        float budgetAnnuel = 0;
+        for (Transaction transaction : achat){
+            if (transaction.getVenduLe().getYear() == annee)
+                budgetAnnuel += transaction.getPrixVente();
+        }
+        return budgetAnnuel;
+    }
 }
+
     
     

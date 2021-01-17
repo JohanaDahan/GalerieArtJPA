@@ -29,7 +29,19 @@ public class Galerie {
     @OneToMany(mappedBy = "oraganisateur", cascade= CascadeType.PERSIST)
     private List<Exposition> expositions;
      
-     
+      public float CAannuel(int annee){
+        float caAnnuel=0;
+        for (Exposition exposition: expositions){
+            if(exposition.getDebut().getYear() == annee ){
+                caAnnuel = caAnnuel + exposition.CA();
+            }
+        }
+        return caAnnuel;
+    }
+
+    
+
+   
 }
 
     

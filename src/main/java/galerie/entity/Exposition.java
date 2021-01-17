@@ -4,52 +4,47 @@
  * and open the template in the editor.
  */
 package galerie.entity;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.*;
 import lombok.*;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author johan
  */
-@Setter @NoArgsConstructor @RequiredArgsConstructor @ToString@Entity
+@Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
+@Entity 
 public class Exposition {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
-        
-	@NonNull
-	@Column(unique=false)
-        private Date debut;
-        
-        @NonNull
-	@Column(unique=false)
-        private String intitule;
-        
-        @NonNull
-	@Column(unique=false)
-        private int duree;
-        
-                
-                
-        @ManyToOne(optional = false)
-        @NonNull
-        private Galerie oraganisateur;   
+    @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer id;
 
-
-  @ManyToMany
-    @JoinTable(name="accrochage",joinColumns = @JoinColumn(name="exposition_id"),inverseJoinColumns = @JoinColumn(name="tableau_id"))
-    private List<Tableau> oeuvres= new LinkedList<>();
+    @NonNull
+    @Column(unique=false)
+    private LocalDate debut;
     
+    @NonNull
+    @Column(unique=false)
+    private String intitule;
     
-        @OneToMany(mappedBy = "lieuDeVente", cascade= CascadeType.PERSIST)
-        private List<Transaction> ventes;
-
-  public float CA(){
+    @NonNull
+    @Column(unique=false)
+    private int duree;
+    
+    @ManyToOne (optional = false)
+    @NonNull
+    private Galerie organisateur;
+    
+    @ManyToMany (mappedBy = "accrochage")
+    @NonNull
+    List<Tableau> oeuvres = new ArrayList<>();
+      
+    @OneToMany (mappedBy= "lieuDeVente", cascade= CascadeType.PERSIST)
+    @NonNull
+    List<Transaction> ventes = new ArrayList<>();
+    
+    public float CA(){
         float ca=0;
         for (Transaction v:ventes){
             ca = ca + v.getPrixVente();
@@ -57,5 +52,11 @@ public class Exposition {
         return ca;
     }
     
-   
+    
+    
 }
+
+    
+    
+   
+

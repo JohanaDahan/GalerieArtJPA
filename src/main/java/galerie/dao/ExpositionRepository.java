@@ -20,12 +20,12 @@ public interface ExpositionRepository extends JpaRepository<Exposition, Integer>
      * @return le chiffre d'affaires de cette exposition
      */
     //float chiffreAffairePour(Integer id);
-     @Query(
-    "Select SUM(PRIX_VENTE) as CA FROM exposition"+
-    "INNER JOIN transaction ON Lieu_De_Vente_ID = Exposition.ID"+
-    "WHERE Lieu_De_Vente_ID = :id"
-    )
-    float chiffreAffairePour(Integer id);
+     
     
-
+  @Query("SELECT SUM(t.prixVente) AS ca "
+            + "FROM Transaction t "
+            + "WHERE t.lieuDeVente.id = :id")
+    public float CA(Integer id);
+           
 }
+

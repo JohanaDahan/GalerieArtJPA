@@ -4,20 +4,18 @@
  * and open the template in the editor.
  */
 package galerie.entity;
+
 import java.time.LocalDate;
-import static java.time.LocalDate.now;
-import java.util.LinkedList;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 /**
  *
  * @author johan
  */
-public class GalerieTest {
-    
-    private LocalDate dateExposition;
+public class ExpositionTest {
+     private LocalDate dateExposition;
     private Galerie g;
     private Personne p;
     private Transaction transaction;
@@ -27,11 +25,7 @@ public class GalerieTest {
     
 float prixVente = 10000;
     
-    
-    
-    
-    
-    @BeforeEach
+@BeforeEach
     public void Setup(){
         dateExposition = LocalDate.of(2021,05,03);
         g = new Galerie("Saatchi", "King's Road, Londres");
@@ -42,9 +36,10 @@ float prixVente = 10000;
         
     }
     
- @Test
-    public void testCAannuel(){
-        float CA = g.CAannuel(2021);
-        assertEquals(30000, CA, "le chiffre d'affaires doit être de 30 000");
+    @Test
+    public void testCA(){
+        float ca = e.CA();
+        assertEquals(500000, ca, "le chiffre d'affaires doit être de 500000");
     }
 }
+
