@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package galerie.entity;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
@@ -30,14 +29,19 @@ public class Personne {
     @OneToMany(mappedBy = "client", cascade= CascadeType.PERSIST)
     private List<Transaction> achat;
     
-     public float budgetArt(int annee) {
-        float budgetAnnuel = 0;
-        for (Transaction transaction : achat){
-            if (transaction.getVenduLe().getYear() == annee)
-                budgetAnnuel += transaction.getPrixVente();
+        
+    public float budgetArt(int annee){
+        float budget = 0;
+        for (Transaction t: achat){
+            if (t.getVenduLe().getYear()==annee){
+                budget = budget + t.getPrixVente();
+            }
         }
-        return budgetAnnuel;
+        return budget;
     }
+     
+     
+    
 }
 
     

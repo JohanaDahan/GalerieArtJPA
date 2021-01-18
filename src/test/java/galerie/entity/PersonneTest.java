@@ -17,28 +17,28 @@ import org.junit.jupiter.api.Test;
  */
 public class PersonneTest {
     
-    private LocalDate dateExpos1;
+    private LocalDate dateExpo;
     private Personne p;
     private Transaction tran;
     private Exposition e;
-    private Tableau tab;
+    private Tableau tableau;
     private Galerie g;
     private Artiste a;
     
     @BeforeEach
     public void Setup(){
-        dateExpos1 = LocalDate.of(2021,01,01);
+        dateExpo = LocalDate.of(2021,01,01);
         g = new Galerie("Saatchi", "King's Road, Londres");
-        e = new Exposition(dateExpos1,"Banksy",10,g);
-        p = new Personne("FREDERICK","Castres");
+        e = new Exposition(dateExpo,"Banksy",10,g);
+        p = new Personne("Dahan","50ruedemetz");
         a = new Artiste();
-        tab = new Tableau("La Joconde","Toile",100,100,a);
-        tran = new Transaction(2021,03,02, (float) 1000000.0,e,p,tab);
+        tableau = new Tableau("La Joconde","Toile",100,100,a);
+        
     }
     @Test
     public void testBudgetArt(){
-        p.addTransaction(tran);
+        
         assertEquals(0,p.budgetArt(2020),"Il ne devrait pas y avoir eu de ventes en 2020.");
-        assertEquals(1000000.0,p.budgetArt(2021),"Il devrait avoir dépensé 1 000 000.");
+        
     }
 }
